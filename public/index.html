@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CRUD de Usuarios</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Sistema de Gestión de Usuarios</h1>
+      </header>
+
+      <section class="form-section">
+        <h2 id="form-title">Crear Usuario</h2>
+        <form id="form" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="nombre">Nombre:</label>
+            <input
+              id="nombre"
+              name="nombre"
+              placeholder="Ingresa el nombre"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="correo">Correo:</label>
+            <input
+              id="correo"
+              name="correo"
+              type="email"
+              placeholder="ejemplo@correo.com"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="edad">Edad:</label>
+            <input
+              id="edad"
+              name="edad"
+              type="number"
+              min="1"
+              max="120"
+              placeholder="Edad"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="imagenPerfil">Imagen de Perfil:</label>
+            <input
+              id="imagenPerfil"
+              name="imagenPerfil"
+              type="file"
+              accept="image/*"
+              required
+            />
+            <div class="file-preview" id="filePreview"></div>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" id="submitBtn">Crear Usuario</button>
+            <button type="button" id="cancelBtn" style="display: none">
+              Cancelar
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <section class="table-section">
+        <h2>Usuarios Registrados</h2>
+        <div class="table-container">
+          <table id="usuariosTable">
+            <thead>
+              <tr>
+                <th>Foto</th>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Edad</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="lista">
+              <!-- Los usuarios se cargarán aquí dinámicamente -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+
+    <script src="logica.js"></script>
+  </body>
+</html>
