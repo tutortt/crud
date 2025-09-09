@@ -28,9 +28,10 @@ form.addEventListener("submit", async (e) => {
 
   try {
     const data = new FormData(form);
+    const baseUrl = window.location.origin;
     const url = editingUserId
-      ? `/api/usuarios/${editingUserId}`
-      : "/api/registro";
+      ? `${baseUrl}/api/usuarios/${editingUserId}`
+      : `${baseUrl}/api/registro`;
     const method = editingUserId ? "PUT" : "POST";
 
     const response = await fetch(url, {
@@ -79,7 +80,8 @@ async function cargar() {
     lista.innerHTML =
       '<tr><td colspan="5" class="loading">Cargando usuarios...</td></tr>';
 
-    const res = await fetch("/api/usuarios");
+    const baseUrl = window.location.origin;
+    const res = await fetch(`${baseUrl}/api/usuarios`);
     if (!res.ok) {
       throw new Error("Error al cargar usuarios");
     }
@@ -99,8 +101,8 @@ async function cargar() {
         `
         <tr>
           <td>
-            <img src="/${u.imagenPerfil}" alt="Foto de perfil" class="profile-img" 
-                 onerror="this.src='/default-avatar.svg'">
+            <img src="${window.location.origin}/${u.imagenPerfil}" alt="Foto de perfil" class="profile-img" 
+                 onerror="this.src='${window.location.origin}/default-avatar.svg'">
           </td>
           <td>${u.nombre}</td>
           <td>${u.correo}</td>
@@ -128,7 +130,8 @@ async function cargar() {
 // EDITAR
 async function editar(id) {
   try {
-    const response = await fetch(`/api/usuarios/${id}`);
+    const editBaseUrl = window.location.origin;
+    const response = await fetch(`${editBaseUrl}/api/usuarios/${id}`);
     if (!response.ok) {
       throw new Error("Error al cargar usuario");
     }
@@ -141,7 +144,7 @@ async function editar(id) {
     document.getElementById("edad").value = user.edad;
 
     // Mostrar imagen actual
-    filePreview.innerHTML = `<img src="/${user.imagenPerfil}" alt="Imagen actual">`;
+    filePreview.innerHTML = `<img src="${editBaseUrl}/${user.imagenPerfil}" alt="Imagen actual">`;
 
     // Cambiar modo a edición
     editingUserId = id;
@@ -169,7 +172,8 @@ async function eliminar(id) {
   }
 
   try {
-    const response = await fetch(`/api/usuarios/${id}`, { method: "DELETE" });
+    const baseUrl = window.location.origin;
+    const response = await fetch(`${baseUrl}/api/usuarios/${id}`, { method: "DELETE" });
 
     if (response.ok) {
       showMessage("success", "Usuario eliminado correctamente");
