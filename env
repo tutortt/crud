@@ -1,2 +1,5 @@
 PORT=3000
-MONGO_URL=<Link de mongo Atlas>
+MONGODB_URI=mongodb+srv://usuario:password@cluster.mongodb.net/nombre-db
+CLOUDINARY_CLOUD_NAME=tu_cloud_name
+CLOUDINARY_API_KEY=tu_api_key
+CLOUDINARY_API_SECRET=tu_api_secret
