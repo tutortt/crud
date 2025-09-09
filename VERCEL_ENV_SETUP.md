@@ -9,12 +9,14 @@ Ve a tu proyecto en Vercel → Settings → Environment Variables y agrega:
 MONGODB_URI = mongodb+srv://usuario:password@cluster.mongodb.net/nombre-db
 ```
 
-### 2. Cloudinary (Opcional - para imágenes)
+### 2. Cloudinary (Requerido - para manejo de imágenes)
 ```
 CLOUDINARY_CLOUD_NAME = tu_cloud_name
 CLOUDINARY_API_KEY = tu_api_key
 CLOUDINARY_API_SECRET = tu_api_secret
 ```
+
+**Nota**: Si no configuras Cloudinary, verás el warning "⚠️ Cloudinary no está configurado correctamente" pero la aplicación funcionará sin subida de imágenes.
 
 ### 3. Entorno
 ```

@@ -24,7 +24,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api', userRoutes);
 
 // Ruta para servir el frontend (SPA) - debe ir al final
-app.get('*', (req, res) => {
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+// Ruta catch-all para SPA (compatible con Vercel)
+app.use((req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
