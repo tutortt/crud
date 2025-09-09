@@ -12,12 +12,8 @@
       "dest": "/index.js"
     },
     {
-      "src": "/(.*\\.(js|css|html|png|jpg|jpeg|gif|ico|svg))",
-      "dest": "/public/$1"
-    },
-    {
       "src": "/(.*)",
-      "dest": "/public/index.html"
+      "dest": "/index.js"
     }
   ]
 }

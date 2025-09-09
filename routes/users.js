@@ -5,10 +5,17 @@ import User from "../models/User.js";
 
 const router = express.Router();
 
-// Configurar Cloudinary con la URL única
+// Configurar Cloudinary
 cloudinary.config({
-  cloudinary_url: process.env.CLOUDINARY_URL
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
 });
+
+// Verificar configuración de Cloudinary
+if (!process.env.CLOUDINARY_CLOUD_NAME || !process.env.CLOUDINARY_API_KEY || !process.env.CLOUDINARY_API_SECRET) {
+  console.warn("⚠️  Cloudinary no está configurado correctamente. Verifica las variables de entorno.");
+}
 
 // Usar memoria en lugar de disco (compatible con Vercel)
 const storage = multer.memoryStorage();
@@ -25,14 +32,20 @@ const uploadToCloudinary = (buffer) => {
     cloudinary.uploader.upload_stream(
       { 
         folder: "usuarios",
+        resource_type: "auto",
         transformation: [
-          { width: 500, height: 500, crop: "fill" }, // Optimizar tamaño
-          { quality: "auto" }
+          { width: 500, height: 500, crop: "fill", gravity: "face" },
+          { quality: "auto", fetch_format: "auto" }
         ]
       },
       (error, result) => {
-        if (error) reject(error);
-        else resolve(result);
+        if (error) {
+          console.error("Error subiendo a Cloudinary:", error);
+          reject(error);
+        } else {
+          console.log("Imagen subida exitosamente:", result.secure_url);
+          resolve(result);
+        }
       }
     ).end(buffer);
   });
@@ -54,7 +67,15 @@ router.post(
       }
 
       // Subir imagen a Cloudinary
-      const uploadResult = await uploadToCloudinary(request.file.buffer);
+      let uploadResult;
+      try {
+        uploadResult = await uploadToCloudinary(request.file.buffer);
+      } catch (uploadError) {
+        console.error("Error subiendo imagen:", uploadError);
+        return response.status(500).json({ 
+          error: "Error al subir la imagen. Intenta con otra imagen." 
+        });
+      }
       
       const nuevoUsuario = new User({ 
         nombre, 
@@ -124,8 +145,15 @@ router.put(
       
       // Si hay nueva imagen, subirla a Cloudinary
       if (request.file) {
-        const uploadResult = await uploadToCloudinary(request.file.buffer);
-        updates.imagenPerfil = uploadResult.secure_url;
+        try {
+          const uploadResult = await uploadToCloudinary(request.file.buffer);
+          updates.imagenPerfil = uploadResult.secure_url;
+        } catch (uploadError) {
+          console.error("Error subiendo nueva imagen:", uploadError);
+          return response.status(500).json({ 
+            error: "Error al subir la nueva imagen. Intenta con otra imagen." 
+          });
+        }
       }
       
       const usuario = await User.findByIdAndUpdate(

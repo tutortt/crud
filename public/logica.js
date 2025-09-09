@@ -101,7 +101,7 @@ async function cargar() {
         `
         <tr>
           <td>
-            <img src="${window.location.origin}/${u.imagenPerfil}" alt="Foto de perfil" class="profile-img" 
+            <img src="${u.imagenPerfil}" alt="Foto de perfil" class="profile-img" 
                  onerror="this.src='${window.location.origin}/default-avatar.svg'">
           </td>
           <td>${u.nombre}</td>
@@ -144,7 +144,7 @@ async function editar(id) {
     document.getElementById("edad").value = user.edad;
 
     // Mostrar imagen actual
-    filePreview.innerHTML = `<img src="${editBaseUrl}/${user.imagenPerfil}" alt="Imagen actual">`;
+    filePreview.innerHTML = `<img src="${user.imagenPerfil}" alt="Imagen actual">`;
 
     // Cambiar modo a edición
     editingUserId = id;
