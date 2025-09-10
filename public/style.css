@@ -7,7 +7,7 @@
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);
   min-height: 100vh;
   color: #333;
   line-height: 1.6;
@@ -46,7 +46,7 @@ header h1 {
   color: #4a5568;
   margin-bottom: 25px;
   font-size: 1.8rem;
-  border-bottom: 3px solid #667eea;
+  border-bottom: 3px solid #e53e3e;
   padding-bottom: 10px;
 }
 
@@ -75,9 +75,9 @@ header h1 {
 
 .form-group input:focus {
   outline: none;
-  border-color: #667eea;
+  border-color: #e53e3e;
   background: white;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.1);
 }
 
 .form-group input:hover {
@@ -117,14 +117,14 @@ button {
 }
 
 #submitBtn {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);
   color: white;
   flex: 1;
 }
 
 #submitBtn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 5px 15px rgba(229, 62, 62, 0.4);
 }
 
 #cancelBtn {
@@ -151,7 +151,7 @@ table {
 }
 
 thead {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);
   color: white;
 }
 
@@ -243,7 +243,7 @@ tbody tr:hover {
   height: 20px;
   border: 3px solid #e2e8f0;
   border-radius: 50%;
-  border-top-color: #667eea;
+  border-top-color: #e53e3e;
   animation: spin 1s ease-in-out infinite;
   margin-left: 10px;
 }
